@@ -1,0 +1,12 @@
+A:\Namizje\maw-muter\maw-muter\bin\Debug\maw-muter.exe.config
+A:\Namizje\maw-muter\maw-muter\bin\Debug\maw-muter.exe
+A:\Namizje\maw-muter\maw-muter\bin\Debug\maw-muter.pdb
+A:\Namizje\maw-muter\maw-muter\bin\Debug\CSCore.xml
+A:\Namizje\maw-muter\maw-muter\bin\Debug\System.Diagnostics.DiagnosticSource.xml
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.csproj.AssemblyReference.cache
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.csproj.SuggestedBindingRedirects.cache
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.csproj.CoreCompileInputs.cache
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.csproj.Fody.CopyLocal.cache
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.csproj.CopyComplete
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.exe
+A:\Namizje\maw-muter\maw-muter\obj\Debug\maw-muter.pdb
