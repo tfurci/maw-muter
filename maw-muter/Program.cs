@@ -25,7 +25,18 @@ class Program
             }
 
             string targetProcessName = args[1];
-            await MuteOrUnmuteProcess(targetProcessName);
+            await MuteOrUnmuteActive(targetProcessName);
+        }
+        else if (command.Equals("muteall", StringComparison.OrdinalIgnoreCase))
+        {
+            if (args.Length < 2)
+            {
+                Console.WriteLine("Please provide the process name to mute or unmute as an argument.");
+                return;
+            }
+
+            string targetProcessName = args[1];
+            await MuteOrUnmuteAll(targetProcessName);
         }
         else if (command.Equals("list", StringComparison.OrdinalIgnoreCase))
         {
@@ -37,7 +48,7 @@ class Program
         }
     }
 
-    private static async Task MuteOrUnmuteProcess(string targetProcessName)
+    private static async Task MuteOrUnmuteActive(string targetProcessName)
     {
         bool operationPerformed = false;
 
@@ -83,6 +94,51 @@ class Program
             Console.WriteLine("No active audio session found for the specified process.");
         }
     }
+
+    private static async Task MuteOrUnmuteAll(string targetProcessName)
+    {
+        bool operationPerformed = false;
+
+        using (var deviceEnumerator = new MMDeviceEnumerator())
+        {
+            var activeRenderDevices = deviceEnumerator.EnumAudioEndpoints(DataFlow.Render, DeviceState.Active);
+            foreach (var device in activeRenderDevices)
+            {
+                using (var sessionManager = GetAudioSessionManager2(device, DataFlow.Render))
+                {
+                    var sessionEnumerator = sessionManager.GetSessionEnumerator();
+                    foreach (var session in sessionEnumerator)
+                    {
+                        using (var audioSessionControl = session.QueryInterface<AudioSessionControl2>())
+                        {
+                            string exeName = await GetExecutableName(audioSessionControl);
+                            if (exeName != null && exeName.Equals(targetProcessName, StringComparison.OrdinalIgnoreCase))
+                            {
+                                var simpleVolume = session.QueryInterface<SimpleAudioVolume>();
+                                if (simpleVolume != null)
+                                {
+                                    simpleVolume.IsMuted = !simpleVolume.IsMuted;
+                                    operationPerformed = true;
+                                    break; // Add break here to exit the loop after muting
+                                }
+                            }
+                        }
+                    }
+                }
+
+                if (operationPerformed)
+                {
+                    break;
+                }
+            }
+        }
+
+        if (!operationPerformed)
+        {
+            Console.WriteLine("No audio session found for the specified process.");
+        }
+    }
+
 
     private static async Task ListAudioProcesses()
     {
