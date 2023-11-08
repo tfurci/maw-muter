@@ -42,6 +42,10 @@ class Program
         {
             await ListAudioProcesses();
         }
+        else if (command.Equals("version", StringComparison.OrdinalIgnoreCase))
+        {
+            Console.WriteLine("Version v2.0.0");
+        }
         else
         {
             Console.WriteLine("Invalid command. Please use 'mute' or 'list'.");
