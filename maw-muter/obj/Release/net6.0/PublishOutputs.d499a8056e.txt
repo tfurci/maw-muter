@@ -1,0 +1,6 @@
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.exe
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.dll
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.deps.json
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.runtimeconfig.json
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.pdb
+A:\Namizje\maw-muter\maw-muter\bin\Release\publish\CSCore.dll

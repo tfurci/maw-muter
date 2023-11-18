@@ -1,0 +1,17 @@
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\maw-muter.exe
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\maw-muter.deps.json
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\maw-muter.runtimeconfig.json
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\maw-muter.dll
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\maw-muter.pdb
+A:\Namizje\maw-muter\maw-muter\bin\Release\net6.0\CSCore.dll
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.csproj.AssemblyReference.cache
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.GeneratedMSBuildEditorConfig.editorconfig
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.AssemblyInfoInputs.cache
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.AssemblyInfo.cs
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.csproj.CoreCompileInputs.cache
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.csproj.CopyComplete
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.dll
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\refint\maw-muter.dll
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.pdb
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\maw-muter.genruntimeconfig.cache
+A:\Namizje\maw-muter\maw-muter\obj\Release\net6.0\ref\maw-muter.dll

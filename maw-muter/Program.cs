@@ -44,7 +44,7 @@ class Program
         }
         else if (command.Equals("version", StringComparison.OrdinalIgnoreCase))
         {
-            Console.WriteLine("Version v2.0.0");
+            Console.WriteLine("Version v3.0.0");
         }
         else
         {
