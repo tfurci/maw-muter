@@ -114,15 +114,21 @@ class Program
 
                     if (process != null && process.ProcessName.Equals(targetExeName, StringComparison.OrdinalIgnoreCase))
                     {
-                        session.SimpleAudioVolume.Mute = !session.SimpleAudioVolume.Mute;
-                        Console.WriteLine($"{(session.SimpleAudioVolume.Mute ? "Muted" : "Unmuted")}: {process.ProcessName}");
+                        // Check if the session is active before toggling mute state
+                        if (session.State == AudioSessionState.AudioSessionStateActive)
+                        {
+                            session.SimpleAudioVolume.Mute = !session.SimpleAudioVolume.Mute;
+                            Console.WriteLine($"{(session.SimpleAudioVolume.Mute ? "Muted" : "Unmuted")}: {process.ProcessName}");
+                            return; // Break out of the loop once the mute state is toggled
+                        }
                     }
                 }
             }
-        }
 
-        Console.WriteLine($"No audio session found for the specified process: {targetExeName}");
+            Console.WriteLine($"No active audio session found for the specified process: {targetExeName}");
+        }
     }
+
     private static void SwitchMuteOther(string targetExeName)
     {
         string[] excludedApps = ReadExcludedApps();
