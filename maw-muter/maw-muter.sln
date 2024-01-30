@@ -3,23 +3,29 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.8.34330.188
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "maw-muter", "maw-muter.csproj", "{E39CCE7C-B76C-43A8-A32D-0553216CCCF4}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "maw-muter", "maw-muter.csproj", "{F0500F5F-AEAD-4048-B8A9-A83C223D068E}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
+		Debug|x64 = Debug|x64
 		Release|Any CPU = Release|Any CPU
+		Release|x64 = Release|x64
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{E39CCE7C-B76C-43A8-A32D-0553216CCCF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{E39CCE7C-B76C-43A8-A32D-0553216CCCF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{E39CCE7C-B76C-43A8-A32D-0553216CCCF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{E39CCE7C-B76C-43A8-A32D-0553216CCCF4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Debug|Any CPU.ActiveCfg = Release|Any CPU
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Debug|Any CPU.Build.0 = Release|Any CPU
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Debug|x64.ActiveCfg = Debug|x64
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Debug|x64.Build.0 = Debug|x64
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Release|x64.ActiveCfg = Release|x64
+		{F0500F5F-AEAD-4048-B8A9-A83C223D068E}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
-		SolutionGuid = {D739335E-3CE2-47F9-A5EB-432256E5A59E}
+		SolutionGuid = {CEBC2A96-CE41-49A4-88AE-984719DA5F5B}
 	EndGlobalSection
 EndGlobal

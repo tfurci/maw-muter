@@ -4,7 +4,7 @@ using NAudio.CoreAudioApi;
 using System.Diagnostics;
 using System.Linq;
 using NAudio.CoreAudioApi.Interfaces;
-using System.Collections.Generic;
+using System.Data;
 
 class Program
 {
