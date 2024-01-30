@@ -1,2 +1,0 @@
-A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.pdb
-A:\Namizje\maw-muter\maw-muter\bin\Release\publish\maw-muter.exe
