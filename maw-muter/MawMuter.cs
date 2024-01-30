@@ -8,14 +8,13 @@ using System.Data;
 
 class Program
 {
-    static void Main(string[] args)
+    static async Task Main(string[] args)
     {
         if (args.Length < 1)
         {
             Console.WriteLine("Maw-Muter v4.0.0");
             Console.WriteLine("Please provide a command (list, mute, mute-other, mute-more, excluded) and optionally an executable name.");
             return;
-
         }
 
         string command = args[0].ToLower();
@@ -34,7 +33,7 @@ class Program
                 }
 
                 string targetExeName = Path.GetFileNameWithoutExtension(args[1]);
-                ToggleMute(targetExeName);
+                await ToggleMute(targetExeName);
                 break;
 
             case "mute-other":
@@ -45,7 +44,7 @@ class Program
                 }
 
                 string otherExeName = Path.GetFileNameWithoutExtension(args[1]);
-                SwitchMuteOther(otherExeName);
+                await SwitchMuteOther(otherExeName);
                 break;
 
             case "mute-more":
@@ -56,7 +55,7 @@ class Program
                 }
 
                 string targetExeMoreName = Path.GetFileNameWithoutExtension(args[1]);
-                MuteAllInstances(targetExeMoreName);
+                await MuteAllInstances(targetExeMoreName);
                 break;
 
             case "excluded":
@@ -95,7 +94,7 @@ class Program
         }
     }
 
-    private static void ToggleMute(string targetExeName)
+    private static async Task ToggleMute(string targetExeName)
     {
         using (var enumerator = new MMDeviceEnumerator())
         {
@@ -129,7 +128,7 @@ class Program
         }
     }
 
-    private static void SwitchMuteOther(string targetExeName)
+    private static async Task SwitchMuteOther(string targetExeName)
     {
         string[] excludedApps = ReadExcludedApps();
 
@@ -189,7 +188,7 @@ class Program
     }
 
 
-    private static void MuteAllInstances(string targetExeName)
+    private static async Task MuteAllInstances(string targetExeName)
     {
         string[] excludedApps = ReadExcludedApps();
 
