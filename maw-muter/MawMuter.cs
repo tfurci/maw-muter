@@ -252,7 +252,7 @@ class Program
 
     private static string[] ReadExcludedApps()
     {
-        string excludedFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "excluded.txt");
+        string excludedFilePath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "mme.txt");
 
         if (File.Exists(excludedFilePath))
         {
