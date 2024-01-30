@@ -255,7 +255,11 @@ class Program
 
         if (File.Exists(excludedFilePath))
         {
-            return File.ReadAllLines(excludedFilePath);
+            var excludedApps = File.ReadAllLines(excludedFilePath)
+                .Select(app => Path.GetFileNameWithoutExtension(app))
+                .ToArray();
+
+            return excludedApps;
         }
 
         return new string[0];
