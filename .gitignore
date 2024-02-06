@@ -1,10 +1,10 @@
-maw-muter/obj
-maw-muter/Properties
-maw-muter/exe-muter.csproj.user
-maw-muter/.vs/
-maw-muter/obj/
-maw-muter/packages/
-maw-muter/bin/Debug/
-maw-muter/maw-muter.csproj.user
-maw-muter/bin/x64/
-maw-muter/bin/Release/mme.txt
+maw-muter EXE/obj
+maw-muter EXE/Properties
+maw-muter EXE/exe-muter.csproj.user
+maw-muter EXE/.vs/
+maw-muter EXE/obj/
+maw-muter EXE/packages/
+maw-muter EXE/bin/Debug/
+maw-muter EXE/maw-muter EXE.csproj.user
+maw-muter EXE/bin/x64/
+maw-muter EXE/bin/Release/mme.txt
