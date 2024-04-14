@@ -21,7 +21,15 @@ GetVolumeObject(targetExeName) {
     ; Get all audio devices
     Loop, 10 ; Change the loop limit based on the number of audio devices you have
     {
-        DAE := VA_GetDevice(A_Index)
+        if (A_Index = 1) {
+            ; Get the "playback" device
+            DAE := VA_GetDevice("playback")
+        }
+        else {
+            ; Get the numbered devices
+            DAE := VA_GetDevice(A_Index - 1)
+        }
+        
         if (DAE)
         {
             ; Check if the device is active and a rendering endpoint
@@ -59,24 +67,21 @@ GetVolumeObject(targetExeName) {
                                 ISAV := ComObjQuery(IASC2, IID_ISAV)
                                 if (ISAV)
                                 {
-                                    return ISAV ;
-                                }
-                                else
-                                {
-                                    return
+                                    ObjRelease(IASC2)
+                                    ObjRelease(IASC)
+                                    ObjRelease(IASE)
+                                    ObjRelease(IASM2)
+                                    ObjRelease(DAE)
+                                    return ISAV
                                 }
                             }
-                            ObjRelease(IASC2)
                         }
-
                         ObjRelease(IASC2)
                     }
-
                     ObjRelease(IASC)
                 }
+                ObjRelease(IASE)
             }
-
-            ObjRelease(IASE)
             ObjRelease(IASM2)
             ObjRelease(DAE)
         }
