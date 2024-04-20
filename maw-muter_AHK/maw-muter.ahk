@@ -18,8 +18,27 @@ GetVolumeObject(targetExeName) {
     , IID_IASC2 := "{bfb7ff88-7239-4fc9-8fa2-07c950be9c6d}"
     , IID_ISAV := "{87CE5498-68D6-44E5-9215-6DA47EF883D8}"
 
+    ; Initialize device count
+    DeviceCount := 0
+
+    ; Loop through audio devices until no more valid devices are found
+    Loop 
+    {
+        ; Get the audio device
+        DAE := VA_GetDevice(A_Index + 1) ; Adjust index to start from 1
+
+        ; If device is not found, exit loop
+        if (!DAE) {
+            MsgBox, Devices found: %DeviceCount%
+            break
+        }
+
+        ; Increment device count
+        DeviceCount++
+    }
+
     ; Get all audio devices
-    Loop, 10 ; Change the loop limit based on the number of audio devices you have
+    Loop, % DeviceCount + 1 ; Change the loop limit based on the number of audio devices you have
     {
         if (A_Index = 1) {
             ; Get the "playback" device
@@ -27,6 +46,7 @@ GetVolumeObject(targetExeName) {
         }
         else {
             ; Get the numbered devices
+            MsgBox, %A_Index%
             DAE := VA_GetDevice(A_Index - 1)
         }
         
