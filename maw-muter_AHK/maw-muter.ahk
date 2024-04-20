@@ -29,7 +29,7 @@ GetVolumeObject(targetExeName) {
 
         ; If device is not found, exit loop
         if (!DAE) {
-            MsgBox, Devices found: %DeviceCount%
+            ;MsgBox, Devices found: %DeviceCount%
             break
         }
 
@@ -46,7 +46,6 @@ GetVolumeObject(targetExeName) {
         }
         else {
             ; Get the numbered devices
-            MsgBox, %A_Index%
             DAE := VA_GetDevice(A_Index - 1)
         }
         
