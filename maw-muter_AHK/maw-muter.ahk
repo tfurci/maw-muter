@@ -97,6 +97,7 @@ GetVolumeObject(targetExeName) {
                                     ObjRelease(IASM2)
                                     ObjRelease(DAE)
                                     return ISAV
+                                    break
                                 }
                             }
                         }
