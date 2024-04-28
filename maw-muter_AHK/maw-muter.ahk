@@ -35,6 +35,11 @@ GetVolumeObject(targetExeName) {
 
         ; Increment device count
         DeviceCount++
+
+        if (DeviceCount > 100) {
+            MsgBox, DeviceCount exceeded maximum device count (100). Please restart computer and try again. If issue persist please open issue on github's maw-muter repo.
+            break
+        }
     }
 
     ; Get all audio devices
