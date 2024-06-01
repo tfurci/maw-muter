@@ -1,9 +1,10 @@
 name: Update Release
 
 on:
-  push:
-    paths:
-      - maw-muter_AHK/maw-muter.ahk
+    push:
+      paths:
+        - maw-muter_AHK/maw-muter.ahk
+    workflow_dispatch:
 
 jobs:
   update-release:
