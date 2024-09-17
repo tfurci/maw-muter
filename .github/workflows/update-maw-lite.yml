@@ -1,0 +1,17 @@
+name: Check for updates in maw-muter
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  trigger-update:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger update workflow in primary repository
+        uses: peter-evans/repository-dispatch@v1
+        with:
+          repository: tfurci/maw-muter
+          token: ${{ secrets.PAT }}
+          event-type: check-for-updates
