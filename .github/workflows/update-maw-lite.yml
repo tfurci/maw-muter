@@ -12,6 +12,6 @@ jobs:
       - name: Trigger update workflow in primary repository
         uses: peter-evans/repository-dispatch@v1
         with:
-          repository: tfurci/maw-muter
+          repository: tfurci/MuteActiveWindow-Lite
           token: ${{ secrets.PAT }}
           event-type: check-for-updates
