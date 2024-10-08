@@ -1,4 +1,25 @@
 ; MAW-MUTER.ahk (Credits: VA.ahk() & mute_current_application())
+global DeviceCount := 0
+global DAEList := []
+
+; to exclude devices create file mmae.txt and place keywords like this: Microphone,Speaker,Headphone
+global excludeKeywords := []
+LoadExcludeKeywords() {
+    global excludeKeywords
+    MMAEPATH1 := A_ScriptDir . "\mmae.txt"  ; Path to the text file
+    MMAEPATH2 := A_ScriptDir . "\Config\mmae.txt"  ; Path to the text file
+
+    if FileExist(MMAEPATH1) {
+        FileRead, fileContent, %MMAEPATH1%
+        excludeKeywords := StrSplit(fileContent, ",")
+    }
+    else if FileExist(MMAEPATH2)
+    {
+        FileRead, fileContent, %MMAEPATH2%
+        excludeKeywords := StrSplit(fileContent, ",")
+    }
+}
+LoadExcludeKeywords()
 
 MAWAHK(ProcessName) {
     if !(Volume := GetVolumeObject(ProcessName)) {
@@ -13,19 +34,15 @@ MAWAHK(ProcessName) {
     return
 }
 
-GetVolumeObject(targetExeName) {
-    static IID_IASM2 := "{77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F}"
-    , IID_IASC2 := "{bfb7ff88-7239-4fc9-8fa2-07c950be9c6d}"
-    , IID_ISAV := "{87CE5498-68D6-44E5-9215-6DA47EF883D8}"
+GetDeviceCount() {
 
-    ; Initialize device count
+    global DeviceCount, DAEList
     DeviceCount := 0
-
-    ; Loop through audio devices until no more valid devices are found
-    Loop 
-    {
+    DAEList := []  ; Initialize an array to store device names
+    
+    Loop {
         ; Get the audio device
-        DAE := VA_GetDevice(A_Index + 1) ; Adjust index to start from 1
+        DAE := VA_GetDevice(A_Index) ; Adjust index to start from 1
 
         ; If device is not found, exit loop
         if (!DAE) {
@@ -33,27 +50,58 @@ GetVolumeObject(targetExeName) {
             break
         }
 
-        ; Increment device count
+        DeviceName := VA_GetDeviceName(DAE)
+
+        ; Check if the device name contains any of the exclusion keywords
+        shouldExclude := false
+        for index, keyword in excludeKeywords {
+            if (InStr(DeviceName, keyword) > 0) {
+                ;MsgBox, Excluding: %DeviceName%
+                shouldExclude := true
+                break  ; Exit the loop if a match is found
+            }
+        }
+
+        if (shouldExclude) {
+            ; If it matches, skip this device
+            ObjRelease(DAE)  ; Release the COM object if not used
+            continue
+        }
+
+        ; If the device is not excluded, add to the list and increment the count
+        DAEList.Push(A_Index)
         DeviceCount++
 
+        ; Display the device name for verification (optional)
+        ;MsgBox, %DeviceName% %DAE% %A_Index%
+
+        ; Safety check to prevent endless loop
         if (DeviceCount > 100) {
-            MsgBox, DeviceCount exceeded maximum device count (100). Please restart computer and try again. If issue persist please open issue on github's maw-muter repo.
+            MsgBox, DeviceCount exceeded maximum device count (100). Please restart computer and try again. If the issue persists, please open an issue on GitHub's maw-muter repo.
             break
         }
+        
+        ; Release the COM object after use
+        ObjRelease(DAE)
     }
 
+    ; Return both DeviceCount and the list of devices
+    return {Count: DeviceCount, Devices: DAEList}
+}
+GetDeviceCount()
+
+GetVolumeObject(targetExeName) {
+    global DAEList
+    static IID_IASM2 := "{77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F}"
+    , IID_IASC2 := "{bfb7ff88-7239-4fc9-8fa2-07c950be9c6d}"
+    , IID_ISAV := "{87CE5498-68D6-44E5-9215-6DA47EF883D8}"
+
     ; Get all audio devices
-    Loop, % DeviceCount + 1 ; Change the loop limit based on the number of audio devices you have
+    Loop, % DAEList.MaxIndex()
     {
-        if (A_Index = 1) {
-            ; Get the "playback" device
-            DAE := VA_GetDevice("playback")
-        }
-        else {
-            ; Get the numbered devices
-            DAE := VA_GetDevice(A_Index - 1)
-        }
-        
+        DeviceNumber := DAEList[A_Index]  ; Get the device name from the list
+        DAE := VA_GetDevice(DeviceNumber)
+
         if (DAE)
         {
             ; Check if the device is active and a rendering endpoint
@@ -113,6 +161,7 @@ GetVolumeObject(targetExeName) {
     }
 
     ; MsgBox No active audio session found for the specified process: %targetExeName%
+    GetDeviceCount()
     return ; Return 0 if there's an issue retrieving the interface
 }
 
