@@ -22,14 +22,23 @@ LoadExcludeKeywords() {
 LoadExcludeKeywords()
 
 MAWAHK(ProcessName) {
-    if !(Volume := GetVolumeObject(ProcessName)) {
-        ; MsgBox, There was a problem retrieving the application volume interface
+    if !(Volume := GetVolumeObjectByName(ProcessName)) {
         return
     }
     
-    VA_ISimpleAudioVolume_GetMute(Volume, Mute)  ;Get mute state
-    ; MsgBox % "Application " ProcessName " is currently " (Mute ? "muted" : "not muted")
-    VA_ISimpleAudioVolume_SetMute(Volume, !Mute) ;Toggle mute state
+    VA_ISimpleAudioVolume_GetMute(Volume, Mute)  ; Get mute state
+    VA_ISimpleAudioVolume_SetMute(Volume, !Mute) ; Toggle mute state
+    ObjRelease(Volume)
+    return
+}
+
+MAWAHKPID(PID) {
+    if !(Volume := GetVolumeObjectByPID(PID)) {
+        return
+    }
+
+    VA_ISimpleAudioVolume_GetMute(Volume, Mute)  ; Get mute state
+    VA_ISimpleAudioVolume_SetMute(Volume, !Mute) ; Toggle mute state
     ObjRelease(Volume)
     return
 }
@@ -90,7 +99,15 @@ GetDeviceCount() {
 }
 GetDeviceCount()
 
-GetVolumeObject(targetExeName) {
+GetVolumeObjectByName(targetExeName) {
+    return GetVolumeObject(targetExeName, "name")
+}
+
+GetVolumeObjectByPID(targetPID) {
+    return GetVolumeObject(targetPID, "pid")
+}
+
+GetVolumeObject(target, mode) {
     global DAEList
     static IID_IASM2 := "{77AA99A0-1BD6-484F-8BC7-2C654C9A9B6F}"
     , IID_IASC2 := "{bfb7ff88-7239-4fc9-8fa2-07c950be9c6d}"
@@ -127,10 +144,9 @@ GetVolumeObject(targetExeName) {
                     if (IASC2)
                     {
                         VA_IAudioSessionControl2_GetProcessID(IASC2, SPID)
-                        ProcessNameFromPID := GetProcessNameFromPID(SPID)
 
                         ; If the process name matches the one we are looking for
-                        if (ProcessNameFromPID == targetExeName)
+                        if ((mode == "name" && GetProcessNameFromPID(SPID) == target) || (mode == "pid" && SPID == target))
                         {
                             ; Check if the session is active before retrieving volume interface
                             VA_IAudioSessionControl_GetState(IASC2, SessionState)
