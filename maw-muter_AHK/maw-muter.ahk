@@ -179,7 +179,7 @@ GetVolumeObject(target, mode) {
     if (mode == "pid")
     {
         processName := GetProcessNameFromPID(target)
-        MsgBox, % "No active audio session found for PID: " target "`nRetrying with process name: " processName
+        ; MsgBox, % "No active audio session found for PID: " target "`nRetrying with process name: " processName
         return GetVolumeObject(processName, "name")
     }
     ; MsgBox, No active audio session found for the specified process: %targetExeName%
