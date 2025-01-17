@@ -175,8 +175,14 @@ GetVolumeObject(target, mode) {
             ObjRelease(DAE)
         }
     }
-
-    ; MsgBox No active audio session found for the specified process: %targetExeName%
+    ; If no active audio session is found for the PID, get the process name and retry
+    if (mode == "pid")
+    {
+        processName := GetProcessNameFromPID(target)
+        MsgBox, % "No active audio session found for PID: " target "`nRetrying with process name: " processName
+        return GetVolumeObject(processName, "name")
+    }
+    ; MsgBox, No active audio session found for the specified process: %targetExeName%
     GetDeviceCount()
     return ; Return 0 if there's an issue retrieving the interface
 }
